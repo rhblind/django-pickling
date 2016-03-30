@@ -3,7 +3,7 @@ __version__ = '.'.join(map(str, VERSION))
 
 
 from django.db.models import Model
-from itertools import izip
+from django.utils.six.moves import zip
 
 
 def attnames(cls, _cache={}):
@@ -15,7 +15,7 @@ def attnames(cls, _cache={}):
 
 def model_unpickle(cls, data):
     obj = cls.__new__(cls)
-    obj.__dict__.update(izip(attnames(cls), data))
+    obj.__dict__.update(zip(attnames(cls), data))
     return obj
 model_unpickle.__safe_for_unpickle__ = True
 
